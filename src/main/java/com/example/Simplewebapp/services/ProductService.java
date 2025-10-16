@@ -50,12 +50,15 @@ public class ProductService implements ProductOperations {
     }
 
     public <T extends Product> int calculateTotalPrice(List<T> productList) {
-        int totalPrice = 0;
-        for (T product : productList) {
-            totalPrice += product.getProdPrice();
-        }
-        return totalPrice;
+        return productList.stream()
+                .mapToInt(Product::getProdPrice)
+                .sum();
     }
 
-
+    // New method using Stream API and our Functional Interface
+    public List<Product> getFilteredProducts(ProductFilter filter) {
+        return productsMap.values().stream()
+                .filter(filter::test)
+                .collect(Collectors.toList());
+    }
 }
