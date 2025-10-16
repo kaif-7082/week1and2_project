@@ -24,4 +24,8 @@ public class ProductController {
     public void addProduct(@RequestBody Product prod) {
         service.addProduct(prod);
     }
+    @GetMapping("/products/total-price")
+    public int getTotalPrice() {
+        return service.calculateTotalPrice(service.getProducts());
+    }
 }

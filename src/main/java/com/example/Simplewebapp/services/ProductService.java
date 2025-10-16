@@ -48,4 +48,14 @@ public class ProductService implements ProductOperations {
             return "Product is out of stock.";
         }
     }
+
+    public <T extends Product> int calculateTotalPrice(List<T> productList) {
+        int totalPrice = 0;
+        for (T product : productList) {
+            totalPrice += product.getProdPrice();
+        }
+        return totalPrice;
+    }
+
+
 }
